@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useReducer } from 'react';
 import './index.scss';
 import axios from 'axios';
 
@@ -27,7 +27,7 @@ const MainPage = () => {
                         {products.map(p=>(
                             <div className='product-card' key={p.id}>
                             <div className='product-img'>
-                                <img src="images/products/product1.jpg" alt="" />
+                                <img src={p.imgsrc} alt="" />
                             </div>
                             <div className='product-contents'>
                                 <span className='product-name'>{p.name}</span>
@@ -38,78 +38,6 @@ const MainPage = () => {
                             </div>
                         </div>
                         ))}
-                        {/* <div className='product-card'>
-                            <div className='product-img'>
-                                <img src="images/products/product1.jpg" alt="" />
-                            </div>
-                            <div className='product-contents'>
-                                <span className='product-name'>제품명</span>
-                                <span className='product-price'>가격</span>
-                                <div className='product-seller'>
-                                    <img src="images/icons/avatar.png" alt="" />아무나
-                                </div>
-                            </div>
-                        </div>
-                        <div className='product-card'>
-                            <div className='product-img'>
-                                <img src="images/products/product1.jpg" alt="" />
-                            </div>
-                            <div className='product-contents'>
-                                <span className='product-name'>제품명</span>
-                                <span className='product-price'>가격</span>
-                                <div className='product-seller'>
-                                    <img src="images/icons/avatar.png" alt="" />아무나
-                                </div>
-                            </div>
-                        </div>
-                        <div className='product-card'>
-                            <div className='product-img'>
-                                <img src="images/products/product1.jpg" alt="" />
-                            </div>
-                            <div className='product-contents'>
-                                <span className='product-name'>제품명</span>
-                                <span className='product-price'>가격</span>
-                                <div className='product-seller'>
-                                    <img src="images/icons/avatar.png" alt="" />아무나
-                                </div>
-                            </div>
-                        </div>
-                        <div className='product-card'>
-                            <div className='product-img'>
-                                <img src="images/products/product1.jpg" alt="" />
-                            </div>
-                            <div className='product-contents'>
-                                <span className='product-name'>제품명</span>
-                                <span className='product-price'>가격</span>
-                                <div className='product-seller'>
-                                    <img src="images/icons/avatar.png" alt="" />아무나
-                                </div>
-                            </div>
-                        </div>
-                        <div className='product-card'>
-                            <div className='product-img'>
-                                <img src="images/products/product1.jpg" alt="" />
-                            </div>
-                            <div className='product-contents'>
-                                <span className='product-name'>제품명</span>
-                                <span className='product-price'>가격</span>
-                                <div className='product-seller'>
-                                    <img src="images/icons/avatar.png" alt="" />아무나
-                                </div>
-                            </div>
-                        </div>
-                        <div className='product-card'>
-                            <div className='product-img'>
-                                <img src="images/products/product1.jpg" alt="" />
-                            </div>
-                            <div className='product-contents'>
-                                <span className='product-name'>제품명</span>
-                                <span className='product-price'>가격</span>
-                                <div className='product-seller'>
-                                    <img src="images/icons/avatar.png" alt="" />아무나
-                                </div>
-                            </div>
-                        </div> */}
                     </div>
                 </div>
             </div>
