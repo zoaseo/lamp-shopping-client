@@ -1,24 +1,36 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import "./product.scss";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import useAsync from '../customHook/useAsync';
+import { useNavigate } from 'react-router-dom';
+import { API_URL } from '../config/constants';
 
+async function getProducts(id){
+    const response = await axios.get(`${API_URL}/product/${id}`);
+    return response.data;
+}
 const ProductPage = () => {
-    const [ product, setProduct ] = useState(null);
-    // useParams() 실행되면 파라미터 값을 가지고 있는 객체를 반환
     // product/1
     const { id } = useParams();
-    useEffect(function(){
-        axios.get(`http://localhost:3000/product/${id}`)
+    const [ state ] = useAsync(()=>getProducts(id),[id]);
+    const { loading, data:product, error } = state;
+    
+    const navigate = useNavigate();
+    const productDel = () => {
+        axios.delete(`${API_URL}/product/${id}`)
         .then(result=>{
-            const data = result.data;
-            setProduct(data);
+            console.log("삭제되었습니다.");
+            navigate("/"); // 리다이렉션 추가
         })
         .catch(e=>{
             console.log(e);
         })
-    },[])
-    if(!product) return <div>로딩중입니다....</div>
+    }
+    if(loading) return <div>로딩중.....</div>
+    if(error) return <div>에러가 발생했습니다.</div>
+    if(!product) return <div>로딩중입니다.</div>
+
     return (
         <div className='inner'>
             <div id="image-box">
@@ -38,9 +50,13 @@ const ProductPage = () => {
                     <li>
                         {product.price}원
                     </li>
-                    <li>등록일 2022년 6월 2일</li>
+                    <li>등록일 </li>
                     <li>상세설명 </li>
+                    <li>{product.description}</li>
                 </ul>
+            </div>
+            <div>
+                <span onClick={productDel}>삭제하기</span>
             </div>
         </div>
     );
